@@ -1,19 +1,21 @@
 const { StatusCodes } = require('http-status-codes');
-const conn = require('../config/db');
+const User = require('../models/User')
 
-const login = (req, res) => {
-    const { email, password } = req.body;
+const login = async (req, res) => {
+    const { email } = req.body;
+    let user;
 
-    let sql = '';
+    try {
+        user = await User.findUserByEmail(email);
+    } catch (error) {
+        return res.staus(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
 
-    conn.query(sql, (err, results) => {
-        if (err)
-            return res.status(StatusCodes.BAD_REQUEST).end();
+    if (!user)
+        return res.staus(StatusCodes.UNAUTHORIZED).end();
 
-        return res.status(StatusCodes.OK).json(results);
-    })
-    // return res.status(StatusCodes.OK).json('로그인');
 
+    res.status(StatusCodes.OK).json(user);
 }
 
 module.exports = {
