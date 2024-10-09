@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const conn = require('../config/db');
+const List = require('../models/List')
 
 const createList = async (req, res) => {
     const { title } = req.body;

@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const conn = require('../config/db');
+const User = require('../models/User')
 
 const login = async (req, res) => {
     const { email } = req.body;
