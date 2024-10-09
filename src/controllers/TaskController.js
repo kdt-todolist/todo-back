@@ -12,13 +12,13 @@ const createTask = async (req, res) => {
     }
 }
 
-const updateTaskContent = async (req, res) => {
+const updateTask = async (req, res) => {
     const { id } = req.params;
-    const { content } = req.body;
+    const { content, done } = req.body;
 
     let updateRows = 0;
     try {
-        updateRows = await Task.updateTaskContentById(id, content);
+        updateRows = await Task.updateTaskById(id, content, done);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
@@ -29,22 +29,6 @@ const updateTaskContent = async (req, res) => {
     res.status(StatusCodes.OK).end();
 }
 
-const updateTaskDone = async (req, res) => {
-    const { id } = req.params;
-    const { done } = req.body;
-
-    let updateRows = 0;
-    try {
-        updateRows = await Task.updateTaskDoneById(id, done);
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
-    }
-
-    if (!updateRows)
-        return res.status(StatusCodes.NOT_FOUND).end();
-
-    res.status(StatusCodes.OK).end();
-}
 
 const deleteTask = async (req, res) => {
     const { id } = req.params;
@@ -73,8 +57,7 @@ const getAllTask = async (req, res) => {
 
 module.exports = {
     createTask,
-    updateTaskContent,
-    updateTaskDone,
+    updateTask,
     deleteTask,
     getAllTask
 }

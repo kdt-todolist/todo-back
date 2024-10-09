@@ -20,7 +20,7 @@ const deleteListValidation = [
     validateRequest
 ]
 
-const updateListTitleValidation = [
+const updateListValidation = [
     param('id')
         .isInt()
         .toInt()
@@ -32,15 +32,7 @@ const updateListTitleValidation = [
         .trim()
         .isLength({ max: 15 })
         .withMessage('리스트 이름은 최대 15자까지 가능합니다.'),
-    validateRequest
-]
-
-const updateListIsVisibleValidation = [
-    param('id')
-        .isInt()
-        .toInt()
-        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
-    body('isVisible')
+        body('isVisible')
         .isBoolean()
         .toBoolean()
         .withMessage('올바른 표시 여부 형식이 아닙니다.'),
@@ -50,6 +42,5 @@ const updateListIsVisibleValidation = [
 module.exports = {
     createListValidation,
     deleteListValidation,
-    updateListTitleValidation,
-    updateListIsVisibleValidation
+    updateListValidation
 }

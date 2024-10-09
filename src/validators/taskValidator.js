@@ -24,7 +24,7 @@ const deleteTaskValidation = [
     validateRequest
 ]
 
-const updateTaskContentValidation = [
+const updateTaskValidation = [
     param('id')
         .isInt()
         .toInt()
@@ -36,14 +36,6 @@ const updateTaskContentValidation = [
         .trim()
         .isLength({ max: 15 })
         .withMessage('Task 이름은 최대 15자까지 가능합니다.'),
-    validateRequest
-]
-
-const updateTaskDoneValidation = [
-    param('id')
-        .isInt()
-        .toInt()
-        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     body('done')
         .isBoolean()
         .toBoolean()
@@ -54,6 +46,5 @@ const updateTaskDoneValidation = [
 module.exports = {
     createTaskValidation,
     deleteTaskValidation,
-    updateTaskContentValidation,
-    updateTaskDoneValidation
+    updateTaskValidation
 }
