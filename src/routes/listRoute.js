@@ -1,7 +1,7 @@
 const express = require('express');
 const listValidator = require('../validators/listValidator');
 const router = express.Router();
-const { createList, updateList,  deleteList, getAllList } = require('../controllers/ListController');
+const { createList, updateList,  deleteList, getAllList } = require('../controllers/listController');
 router.use(express.json());
 
 router.post('/', listValidator.createListValidation, createList);
