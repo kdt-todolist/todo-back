@@ -20,7 +20,7 @@ const updateListTitleById = async (id, title) => {
 
 const updateListIsVisibleById = async (id, isVisible) => {
   const sql = `UPDATE tasks SET is_visible = ? WHERE id = ?`;
-  let fields = [id, !isVisible];
+  let fields = [id, isVisible];
   let [result] = await pool.query(sql, fields);
   if (result.affectedRows < 0) {
     throw new Error("Cannot update is_visible in lists table.");

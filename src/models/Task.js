@@ -1,7 +1,7 @@
 const pool = require("../config/db");
 
 const createTask = async (content, list_id) => {
-  const sql = `INSERT INTO tasks (list_id, content) VALUES (?, ?)`;
+  const sql = `INSERT INTO tasks (content, list_id) VALUES (?, ?)`;
   let fields = [content, list_id];
 
   let [result] = await pool.query(sql, fields);
@@ -20,7 +20,7 @@ const updateTaskContentById = async (id, content) => {
 
 const updateTaskDoneById = async (id, done) => {
   const sql = `UPDATE tasks SET done = ? WHERE id = ?`;
-  let fields = [id, !done];
+  let fields = [id, done];
   let [result] = await pool.query(sql, fields);
   if (result.affectedRows < 0) {
     throw new Error("Cannot update done in tasks table.");

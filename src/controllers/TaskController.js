@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const Task = require('../models/task')
+const Task = require('../models/Task')
 
 const createTask = async (req, res) => {
     const { content, list_id } = req.body;
