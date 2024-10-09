@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 const loginRouter = require('./routes/users');
 const taskRouter = require('./routes/taskOperations');
@@ -9,6 +10,8 @@ const routineRouter = require('./routes/routine');
 
 
 dotenv.config({ path: './config/.env' });
+
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   res.send('hi');
