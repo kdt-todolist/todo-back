@@ -12,29 +12,13 @@ const createList = async (req, res) => {
     }
 }
 
-const updateListTitle = async (req, res) => {
+const updateList = async (req, res) => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { title, isVisible } = req.body;
 
     let updateRows = 0;
     try {
-        updateRows = await List.updateListTitleById(id, title);
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
-    }
-
-    if (!updateRows)
-        return res.status(StatusCodes.NOT_FOUND).end();
-
-    res.status(StatusCodes.OK).end();
-}
-const updateListIsVisible = async (req, res) => {
-    const { id } = req.params;
-    const { isVisible } = req.body;
-
-    let updateRows = 0;
-    try {
-        updateRows = await List.updateListIsVisibleById(id, isVisible);
+        updateRows = await List.updateListById(id, title, isVisible);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
@@ -71,8 +55,7 @@ const getAllList = async (req, res) => {
 
 module.exports = {
     createList,
-    updateListTitle,
-    updateListIsVisible,
+    updateList,
     deleteList,
     getAllList
 }
