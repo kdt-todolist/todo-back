@@ -2,10 +2,10 @@ const { StatusCodes } = require('http-status-codes');
 const conn = require('../config/db');
 
 const createTask = async (req, res) => {
-    const { content, category } = req.body;
+    const { content, list_id } = req.body;
 
     try {
-        const task = await Task.createTask(content, category);
+        const task = await Task.createTask(content, list_id);
         return res.status(StatusCodes.CREATED).json(task);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
