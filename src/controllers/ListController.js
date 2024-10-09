@@ -1,24 +1,40 @@
 const { StatusCodes } = require('http-status-codes');
 const conn = require('../config/db');
 
-const createTask = async (req, res) => {
-    const { content, category } = req.body;
+const createList = async (req, res) => {
+    const { title } = req.body;
 
     try {
-        const task = await Task.createTask(content, category);
-        return res.status(StatusCodes.CREATED).json(task);
+        const list = await List.createList(title);
+        return res.status(StatusCodes.CREATED).json(list);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 }
 
-const updateTaskContent = async (req, res) => {
+const updateListTitle = async (req, res) => {
     const { id } = req.params;
-    const { content } = req.body;
+    const { title } = req.body;
 
     let updateRows = 0;
     try {
-        updateRows = await Task.updateTaskContentById(id, content);
+        updateRows = await List.updateListTitleById(id, title);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
+
+    if (!updateRows)
+        return res.status(StatusCodes.NOT_FOUND).end();
+
+    res.status(StatusCodes.OK).end;
+}
+const updateListIsVisible = async (req, res) => {
+    const { id } = req.params;
+    const { isVisible } = req.body;
+
+    let updateRows = 0;
+    try {
+        updateRows = await List.updateListIsVisibleById(id, isVisible);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
@@ -29,52 +45,34 @@ const updateTaskContent = async (req, res) => {
     res.status(StatusCodes.OK).end;
 }
 
-const updateTaskDone = async (req, res) => {
-    const { id } = req.params;
-    const { done } = req.body;
-
-    let updateRows = 0;
-    try {
-        updateRows = await Task.updateTaskDoneById(id, done);
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
-    }
-
-    if (!updateRows)
-        return res.status(StatusCodes.NOT_FOUND).end();
-
-    res.status(StatusCodes.OK).end;
-}
-
-const deleteTask = async (req, res) => {
+const deleteList = async (req, res) => {
     const { id } = req.params;
 
     let deleteRows = 0;
     try {
-        deleteRows = await Task.deleteTaskById(id);
+        deleteRows = await List.deleteListById(id);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 
     if (!deleteRows)
         return res.status(StatusCodes.NOT_FOUND).end();
-
     res.status(StatusCodes.OK).end;
 }
 
-const getAllTask = async (req, res) => {
+const getAllList = async (req, res) => {
     try {
-        const tasks = await Task.findAllTasks();
-        return res.status(StatusCodes.OK).json(tasks);
+        const lists = await List.findAllLists();
+        return res.status(StatusCodes.OK).json(lists);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 }
 
 module.exports = {
-    createTask,
-    updateTaskContent,
-    updateTaskDone,
-    deleteTask,
-    getAllTask
+    createList,
+    updateListTitle,
+    updateListIsVisible,
+    deleteList,
+    getAllList
 }
