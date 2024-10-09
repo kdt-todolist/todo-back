@@ -39,7 +39,7 @@ const deleteListById = async (id) => {
 };
 
 const findAllLists = async () => {
-  const sql = `SELECT * FROM Lists`;
+  const sql = `SELECT * FROM lists`;
   let [result] = await pool.query(sql);
   return result;
 };
