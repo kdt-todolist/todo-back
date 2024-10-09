@@ -26,7 +26,7 @@ const updateTaskContent = async (req, res) => {
     if (!updateRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const updateTaskDone = async (req, res) => {
@@ -43,7 +43,7 @@ const updateTaskDone = async (req, res) => {
     if (!updateRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const deleteTask = async (req, res) => {
@@ -59,7 +59,7 @@ const deleteTask = async (req, res) => {
     if (!deleteRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const getAllTask = async (req, res) => {

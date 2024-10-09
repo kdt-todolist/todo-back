@@ -12,30 +12,24 @@ const updateListTitleById = async (id, title) => {
   const sql = `UPDATE lists SET title = ? WHERE id = ?`;
   let fields = [id, title];
   let [result] = await pool.query(sql, fields);
-  if (result.affectedRows < 0) {
-    throw new Error("Cannot update title in lists table.");
-  }
-  return result;
+
+  return result.affectedRows;
 };
 
 const updateListIsVisibleById = async (id, isVisible) => {
   const sql = `UPDATE tasks SET is_visible = ? WHERE id = ?`;
   let fields = [id, isVisible];
   let [result] = await pool.query(sql, fields);
-  if (result.affectedRows < 0) {
-    throw new Error("Cannot update is_visible in lists table.");
-  }
-  return result;
+
+  return result.affectedRows;
 };
 
 const deleteListById = async (id) => {
   const sql = `DELETE FROM lists WHERE id = ?`;
   let fields = [id];
   let [result] = await pool.query(sql, fields);
-  if (result.affectedRows < 0) {
-    throw new Error("Cannot delete task");
-  }
-  return result;
+
+  return result.affectedRows;
 };
 
 const findAllLists = async () => {

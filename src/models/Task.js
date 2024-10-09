@@ -12,30 +12,24 @@ const updateTaskContentById = async (id, content) => {
   const sql = `UPDATE tasks SET content = ? WHERE id = ?`;
   let fields = [id, content];
   let [result] = await pool.query(sql, fields);
-  if (result.affectedRows < 0) {
-    throw new Error("Cannot update content in tasks table.");
-  }
-  return result;
+
+  return result.affectedRows;
 };
 
 const updateTaskDoneById = async (id, done) => {
   const sql = `UPDATE tasks SET done = ? WHERE id = ?`;
   let fields = [id, done];
   let [result] = await pool.query(sql, fields);
-  if (result.affectedRows < 0) {
-    throw new Error("Cannot update done in tasks table.");
-  }
-  return result;
+
+  return result.affectedRows;
 };
 
 const deleteTaskById = async (id) => {
   const sql = `DELETE FROM tasks WHERE id = ?`;
   let fields = [id];
   let [result] = await pool.query(sql, fields);
-  if (result.affectedRows < 0) {
-    throw new Error("Cannot delete task");
-  }
-  return result;
+
+  return result.affectedRows;
 };
 
 const findAllTasks = async () => {
