@@ -16,7 +16,7 @@ const deleteListValidation = [
     param('id')
         .isInt()
         .toInt()
-        .withMessage('유효한 리스트 ID가 아닙니다.'),
+        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     validateRequest
 ]
 
@@ -24,7 +24,7 @@ const updateListTitleValidation = [
     param('id')
         .isInt()
         .toInt()
-        .withMessage('유효한 리스트 ID가 아닙니다.'),
+        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     body('title')
         .notEmpty()
         .withMessage('리스트 이름을 입력해주세요.')
@@ -39,7 +39,7 @@ const updateListIsVisibleValidation = [
     param('id')
         .isInt()
         .toInt()
-        .withMessage('유효한 리스트 ID가 아닙니다.'),
+        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     body('isVisible')
         .isBoolean()
         .toBoolean()

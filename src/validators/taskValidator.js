@@ -12,7 +12,7 @@ const createTaskValidation = [
     body('list_id')
         .isInt()
         .toInt()
-        .withMessage('유효한 리스트 ID가 아닙니다.'),
+        .withMessage('리스트 ID 값을 숫자 형식으로 입력해주세요.'),
     validateRequest
 ]
 
@@ -20,7 +20,7 @@ const deleteTaskValidation = [
     param('id')
         .isInt()
         .toInt()
-        .withMessage('유효한 Task ID가 아닙니다.'),
+        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     validateRequest
 ]
 
@@ -28,7 +28,7 @@ const updateTaskContentValidation = [
     param('id')
         .isInt()
         .toInt()
-        .withMessage('유효한 Task ID가 아닙니다.'),
+        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     body('content')
         .notEmpty()
         .withMessage('Task 이름을 입력해주세요')
@@ -43,7 +43,7 @@ const updateTaskDoneValidation = [
     param('id')
         .isInt()
         .toInt()
-        .withMessage('유효한 Task ID가 아닙니다.'),
+        .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
     body('done')
         .isBoolean()
         .toBoolean()
