@@ -34,3 +34,6 @@ npm install dotenv
 ```
 npm install passport
 ```
+```
+npm install express-validator
+```
