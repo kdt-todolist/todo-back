@@ -26,7 +26,7 @@ const updateListTitle = async (req, res) => {
     if (!updateRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 const updateListIsVisible = async (req, res) => {
     const { id } = req.params;
@@ -42,7 +42,7 @@ const updateListIsVisible = async (req, res) => {
     if (!updateRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const deleteList = async (req, res) => {
@@ -57,7 +57,7 @@ const deleteList = async (req, res) => {
 
     if (!deleteRows)
         return res.status(StatusCodes.NOT_FOUND).end();
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const getAllList = async (req, res) => {

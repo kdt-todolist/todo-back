@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const Task = require('../models/task')
+const Task = require('../models/Task')
 
 const createTask = async (req, res) => {
     const { content, list_id } = req.body;
@@ -26,7 +26,7 @@ const updateTaskContent = async (req, res) => {
     if (!updateRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const updateTaskDone = async (req, res) => {
@@ -43,7 +43,7 @@ const updateTaskDone = async (req, res) => {
     if (!updateRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const deleteTask = async (req, res) => {
@@ -59,7 +59,7 @@ const deleteTask = async (req, res) => {
     if (!deleteRows)
         return res.status(StatusCodes.NOT_FOUND).end();
 
-    res.status(StatusCodes.OK).end;
+    res.status(StatusCodes.OK).end();
 }
 
 const getAllTask = async (req, res) => {

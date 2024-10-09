@@ -7,14 +7,14 @@ dotenv.config({ path: './src/config/.env' });
 
 app.listen(process.env.PORT);
 
-const loginRouter = require('./routes/users');
-const taskRouter = require('./routes/taskOperations');
-const taskListRouter = require('./routes/taskListManager');
-const routineRouter = require('./routes/routine');
+const userRouter = require('./routes/userRoute');
+const taskRouter = require('./routes/taskRoute');
+const listRouter = require('./routes/listRoute');
+const routineRouter = require('./routes/routineRoute');
 
 app.use(morgan('dev'));
 
-app.use('/users', loginRouter);
+app.use('/users', userRouter);
 app.use('/tasks', taskRouter);
-app.use('/taskLists', taskListRouter);
+app.use('/lists', listRouter);
 app.use('/routines', routineRouter);
