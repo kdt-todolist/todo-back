@@ -5,9 +5,9 @@ const findOrCreateUser = async (email, provider) => {
 
   let fields = [email, provider];
 
-  let [results] = await pool.query(sql, fields);
+  let [rows] = await pool.query(sql, fields);
 
-  if (!results.length) {
+  if (!rows.length) {
     sql = `INSERT INTO users (email, oauth_provider) VALUES (?, ?)`;
     const [insertResult] = await pool.query(sql, fields);
 
@@ -15,10 +15,10 @@ const findOrCreateUser = async (email, provider) => {
       insertResult.insertId,
     ]);
 
-    results = newUser;
+    rows = newUser;
   }
 
-  return results;
+  return rows.length ? rows[0] : null;
 };
 
 module.exports = { findOrCreateUser };
