@@ -2,17 +2,17 @@ const { StatusCodes } = require('http-status-codes');
 const User = require('../models/User')
 
 const login = async (req, res) => {
-    const { email } = req.body;
+    const { email, provider } = req.body;
     let user;
 
     try {
-        user = await User.findUserByEmail(email);
+        user = await User.findOrCreateUser(email, provider);
     } catch (error) {
-        return res.staus(StatusCodes.INTERNAL_SERVER_ERROR).end();
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 
     if (!user)
-        return res.staus(StatusCodes.UNAUTHORIZED).end();
+        return res.status(StatusCodes.UNAUTHORIZED).end();
 
 
     res.status(StatusCodes.OK).json(user);
