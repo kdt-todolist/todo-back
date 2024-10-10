@@ -10,15 +10,16 @@ const createList = async (title) => {
 
 const updateListTitleById = async (id, title) => {
   const sql = `UPDATE lists SET title = ? WHERE id = ?`;
-  let fields = [id, title];
+  let fields = [title, id];
   let [result] = await pool.query(sql, fields);
 
   return result.affectedRows;
 };
 
 const updateListIsVisibleById = async (id, isVisible) => {
-  const sql = `UPDATE tasks SET is_visible = ? WHERE id = ?`;
-  let fields = [id, isVisible];
+  const sql = `UPDATE lists SET is_visible = ? WHERE id = ?`;
+
+  let fields = [isVisible, id];
   let [result] = await pool.query(sql, fields);
 
   return result.affectedRows;
