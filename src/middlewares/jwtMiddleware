@@ -1,0 +1,24 @@
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+const { StatusCodes } = require('http-status-codes');
+
+dotenv.config({ path: './src/config/.env' });
+
+const verfyToken = (req, res) => {
+  const token = req.header('authorization').split(' ')[1];
+
+  if (!token) {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (error) {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+}
+
+module.exports = {
+  verfyToken
+}
