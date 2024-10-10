@@ -20,3 +20,7 @@ app.use('/tasks', taskRouter);
 app.use('/lists', listRouter);
 app.use('/routines', routineRouter);
 app.use('/auth', authRouter);
+
+app.get('/', (req, res) => {
+  res.send('hello');
+})
