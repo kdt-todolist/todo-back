@@ -4,15 +4,18 @@ const { StatusCodes } = require('http-status-codes');
 
 dotenv.config({ path: './src/config/.env' });
 
-const verfyToken = (req, res) => {
-  const token = req.header('authorization').split(' ')[1];
+const verfyToken = (req, res, next) => {
+  let token;
+  if (req.header('Authorization'))
+    token = req.header('Authorization').split(' ')[1];
 
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = decoded.id;
     next();
   } catch (error) {
     return res.status(StatusCodes.UNAUTHORIZED).end();
