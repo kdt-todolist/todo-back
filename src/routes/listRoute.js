@@ -2,7 +2,10 @@ const express = require('express');
 const listValidator = require('../validators/listValidator');
 const router = express.Router();
 const { createList, updateList,  deleteList, getAllList } = require('../controllers/listController');
+const { verfyToken } = require('../middlewares/jwtMiddleware');
+
 router.use(express.json());
+router.use(verfyToken);
 
 router.post('/', listValidator.createListValidation, createList);
 
