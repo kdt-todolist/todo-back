@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const passport = require('passport');
+const User = require('../models/User');
 const GoogleStrategy = require('passport-google-oauth20');
-const { googleAuthCallback } = require('../services/authService');
 
 dotenv.config({ path: './src/config/.env' });
 
@@ -10,6 +10,17 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.GOOGLE_REDIRECT_URL,
   scope: ['email']
-}, googleAuthCallback));
+}, async (accessToken, refreshToken, profile, cb) => {
+  const email = profile.emails[0].value;
+  const provider = profile.provider;
+
+  const user = await User.findOrCreateUser(email, provider);
+
+  if (!user) {
+    return cb(null, false);
+  }
+
+  return cb (null, user);
+}));
 
 module.exports = passport;
