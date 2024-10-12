@@ -59,7 +59,7 @@ const createBulkList = async (req, res) => {
     const userId = req.userId
     try {
         const list = await List.createBulkList(userId, lists);
-        return res.status(StatusCodes.CREATED).json(list);
+        return res.status(StatusCodes.CREATED).json(list, list.id);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }

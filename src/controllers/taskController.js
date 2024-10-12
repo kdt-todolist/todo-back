@@ -2,10 +2,10 @@ const { StatusCodes } = require('http-status-codes');
 const Task = require('../models/Task')
 
 const createTask = async (req, res) => {
-    const { content, list_id } = req.body;
+    const { content, listId } = req.body;
 
     try {
-        const task = await Task.createTask(content, list_id);
+        const task = await Task.createTask(content, listId);
         return res.status(StatusCodes.CREATED).json(task);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
@@ -56,9 +56,9 @@ const getAllTask = async (req, res) => {
 }
 
 const createBulkTask = async (req, res) => {
-    const { tasks } = req.body;
+    const { listId, tasks } = req.body;
     try {
-        const task = await Task.createBulkTask(tasks);
+        const task = await Task.createBulkTask(listId, tasks);
         return res.status(StatusCodes.CREATED).json(task);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
