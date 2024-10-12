@@ -11,5 +11,7 @@ router.delete('/:id', deleteTask);
 
 router.get('/:id', getAllTask)
 
+router.post('/bulk', createBulkTask);
+
 
 module.exports = router;

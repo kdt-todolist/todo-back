@@ -54,9 +54,22 @@ const getAllList = async (req, res) => {
 }
 
 
+const createBulkList = async (req, res) => {
+    const { lists } = req.body;
+    const userId = req.userId
+    try {
+        const list = await List.createBulkList(userId, lists);
+        return res.status(StatusCodes.CREATED).json(list);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
+}
+
+
 module.exports = {
     createList,
     updateList,
     deleteList,
-    getAllList
+    getAllList,
+    createBulkList
 }

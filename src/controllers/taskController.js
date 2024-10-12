@@ -55,9 +55,20 @@ const getAllTask = async (req, res) => {
     }
 }
 
+const createBulkTask = async (req, res) => {
+    const { tasks } = req.body;
+    try {
+        const task = await Task.createBulkTask(tasks);
+        return res.status(StatusCodes.CREATED).json(task);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
+}
+
 module.exports = {
     createTask,
     updateTask,
     deleteTask,
-    getAllTask
+    getAllTask,
+    createBulkTask
 }
