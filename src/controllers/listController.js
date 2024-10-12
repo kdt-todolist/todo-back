@@ -3,9 +3,9 @@ const List = require('../models/List')
 
 const createList = async (req, res) => {
     const { title } = req.body;
-
+    const userId = req.userId
     try {
-        const list = await List.createList(title);
+        const list = await List.createList(userId, title);
         return res.status(StatusCodes.CREATED).json(list);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
@@ -52,6 +52,7 @@ const getAllList = async (req, res) => {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 }
+
 
 module.exports = {
     createList,
