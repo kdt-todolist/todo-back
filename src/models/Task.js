@@ -8,17 +8,9 @@ const createTask = async (content, list_id) => {
   return result;
 };
 
-const updateTaskContentById = async (id, content) => {
-  const sql = `UPDATE tasks SET content = ? WHERE id = ?`;
-  let fields = [id, content];
-  let [result] = await pool.query(sql, fields);
-
-  return result.affectedRows;
-};
-
-const updateTaskDoneById = async (id, done) => {
-  const sql = `UPDATE tasks SET done = ? WHERE id = ?`;
-  let fields = [id, done];
+const updateTaskById = async (id, content, done) => {
+  const sql = `UPDATE tasks SET content = ?, done = ? WHERE id = ?`;
+  let fields = [content, done, id];
   let [result] = await pool.query(sql, fields);
 
   return result.affectedRows;
@@ -32,16 +24,27 @@ const deleteTaskById = async (id) => {
   return result.affectedRows;
 };
 
-const findAllTasks = async () => {
-  const sql = `SELECT * FROM tasks`;
+const findAllTasks = async (listId) => {
+  const sql = `SELECT * FROM tasks WHERE list_id = ?`;
+  let fields = [listId];
   let [result] = await pool.query(sql);
   return result;
 };
 
+const createBulkTask = async (listId, lists) => {
+  const sql = `INSERT INTO lists (list_id, content, done) VALUES ?`;
+  let fields = [];
+  lists.forEach(list => {
+    fields.push([listId, list.content, list.done]);
+  });
+  let [result] = await pool.query(sql, [fields]);
+  return result;
+}
+
 module.exports = {
   createTask,
-  updateTaskDoneById,
-  updateTaskContentById,
+  updateTaskById,
   deleteTaskById,
   findAllTasks,
+  createBulkTask
 };
