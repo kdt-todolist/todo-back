@@ -59,7 +59,7 @@ const resetTaskStatus = async (req, res) => {
     let updateRows = 0;
 
     try {
-        updateRows = await Task.updateDone(taskId);
+        updateRows = await Task.updateTaskById(taskId);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
