@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { resetTaskStatus, updateRoutine, deleteRoutine, createRoutine } = require('../controllers/routineController');
+const { updateRoutine, deleteRoutine, createRoutine } = require('../controllers/routineController');
 router.use(express.json());
 
-router.put('/', resetTaskStatus);
 
 router.put('/:id', updateRoutine);
 

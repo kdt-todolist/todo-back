@@ -54,26 +54,10 @@ const deleteRoutine = async (req, res) => {
 }
 
 
-const resetTaskStatus = async (req, res) => {
-    const { taskId } = req.body;
-    let updateRows = 0;
-
-    try {
-        updateRows = await Task.updateTaskById(taskId);
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
-    }
-
-    if (!updateRows)
-        return res.status(StatusCodes.NOT_FOUND).end();
-
-    res.status(StatusCodes.OK).end();
-}
 
 
 module.exports = {
     createRoutine,
     updateRoutine,
-    deleteRoutine,
-    resetTaskStatus,
+    deleteRoutine
 }
