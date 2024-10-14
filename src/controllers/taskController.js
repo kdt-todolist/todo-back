@@ -66,10 +66,28 @@ const createBulkTask = async (req, res) => {
     }
 }
 
+const resetTaskStatus = async (req, res) => {
+    const { id } = req.params;
+    let updateRows = 0;
+
+    try {
+        updateRows = await Task.updateTaskById(id);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
+
+    if (!updateRows)
+        return res.status(StatusCodes.NOT_FOUND).end();
+
+    res.status(StatusCodes.OK).end();
+}
+
+
 module.exports = {
     createTask,
     updateTask,
     deleteTask,
     getAllTask,
-    createBulkTask
+    createBulkTask,
+    resetTaskStatus
 }

@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { routine } = require('../controllers/routineController');
+const { updateRoutine, deleteRoutine, createRoutine } = require('../controllers/routineController');
 router.use(express.json());
 
-router.get('/', routine);
+
+router.put('/:id', updateRoutine);
+
+router.delete('/:id', deleteRoutine);
+
+router.post('/', createRoutine);
+
 
 
 
