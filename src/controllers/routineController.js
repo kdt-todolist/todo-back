@@ -4,12 +4,19 @@ const Task = require('../models/Task');
 
 const createRoutine = async (req, res) => {
     const { taskId, week, resetTime } = req.body;
+    let updateRows = 0;
+    let routine;
     try {
-        const routine = await Routine.createRoutine(taskId, week, resetTime);
-        return res.status(StatusCodes.CREATED).json(routine);
+        routine = await Routine.createRoutine(taskId, week, resetTime);
+        updateRows = await Task.updateIsRoutine(taskId, true);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
+
+    if (!updateRows)
+        return res.status(StatusCodes.NOT_FOUND).end();
+
+    res.status(StatusCodes.CREATED).json(routine);
 }
 
 const updateRoutine = async (req, res) => {
@@ -36,7 +43,7 @@ const deleteRoutine = async (req, res) => {
     let updateRows = 0;
     try {
         deleteRows = await Routine.deleteRoutineById(id);
-        updateRows = await Task.updateIsRoutine(taskId);
+        updateRows = await Task.updateIsRoutine(taskId, false);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
