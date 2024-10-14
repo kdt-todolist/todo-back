@@ -36,7 +36,7 @@ const findAllTasks = async (listId) => {
     t.*, r.mon, r.tue, r.wed, r.thu, r.fri, r.sat,
     r.sun, r.reset_time
     FROM tasks t LEFT JOIN routine r ON t.id = r.task_id WHERE list_id = ?`;
-  console.log(sql);
+
   let fields = [listId];
   let [result] = await pool.query(sql, fields);
 
@@ -57,7 +57,7 @@ const createBulkTask = async (listId, lists) => {
 const updateIsRoutine = async (id, isRoutine) => {
   const sql = `UPDATE tasks SET is_routine = ? WHERE id = ?`;
   let fields = [isRoutine, id];
-  console.log(sql);
+
   let [result] = await pool.query(sql, fields);
 
   return result.affectedRows;
