@@ -3,7 +3,7 @@ const List = require('../models/List')
 
 const createList = async (req, res) => {
     const { title } = req.body;
-    const userId = req.userId
+    const userId = req.userId;
     try {
         const list = await List.createList(userId, title);
         return res.status(StatusCodes.CREATED).json(list);
@@ -45,9 +45,26 @@ const deleteList = async (req, res) => {
 }
 
 const getAllList = async (req, res) => {
+    const userId = req.userId;
     try {
-        const lists = await List.findAllLists();
+        const lists = await List.findAllLists(userId);
         return res.status(StatusCodes.OK).json(lists);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
+}
+
+
+const createBulkList = async (req, res) => {
+    const { lists } = req.body;
+    const userId = req.userId
+    try {
+        const list = await List.createBulkList(userId, lists);
+        const insertedIds = [];
+        for (let i = 0; i < lists.length; i++) {
+            insertedIds.push(list.insertId + i);
+        }
+        return res.status(StatusCodes.CREATED).json({ list, insertedIds });
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
@@ -58,5 +75,6 @@ module.exports = {
     createList,
     updateList,
     deleteList,
-    getAllList
+    getAllList,
+    createBulkList
 }

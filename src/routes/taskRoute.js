@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createTask, updateTask,  deleteTask, getAllTask } = require('../controllers/taskController');
+const { createTask, updateTask, deleteTask, getAllTask, createBulkTask } = require('../controllers/taskController');
 router.use(express.json());
 
 router.post('/', createTask);
@@ -9,6 +9,9 @@ router.put('/:id', updateTask);
 
 router.delete('/:id', deleteTask);
 
-router.get('/', getAllTask)
+router.get('/:listId', getAllTask)
+
+router.post('/bulk', createBulkTask);
+
 
 module.exports = router;
