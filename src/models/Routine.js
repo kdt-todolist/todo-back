@@ -1,9 +1,9 @@
 const pool = require("../config/db");
 
 const createRoutine = async (taskId, week, resetTime) => {
-  const sql = `INSERT INTO routine (task_id, mon, tue, wed, thu, fri, sat, sun, resetTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  const sql = `INSERT INTO routine (task_id, mon, tue, wed, thu, fri, sat, sun, reset_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
   let fields = [
-    content,
+    taskId,
     week.mon,
     week.tue,
     week.wed,
@@ -11,7 +11,7 @@ const createRoutine = async (taskId, week, resetTime) => {
     week.fri,
     week.sat,
     week.sun,
-    list_id,
+    resetTime,
   ];
 
   let [result] = await pool.query(sql, fields);
@@ -19,7 +19,7 @@ const createRoutine = async (taskId, week, resetTime) => {
 };
 
 const updateRoutineById = async (id, week, resetTime) => {
-  const sql = `UPDATE routine SET mon = ?, tue = ?, wed = ?, thu = ?, fri = ?, sat = ?, sun =?, resetTime = ? WHERE id = ?`;
+  const sql = `UPDATE routine SET mon = ?, tue = ?, wed = ?, thu = ?, fri = ?, sat = ?, sun =?, reset_time = ? WHERE id = ?`;
   let fields = [
     week.mon,
     week.tue,
