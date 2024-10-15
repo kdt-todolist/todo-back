@@ -60,7 +60,7 @@ const getRoutineTasksByListId = async (req, res) => {
         const tasks = await Task.getRoutineTasksByListId(listId);
         return res.status(StatusCodes.OK).json(tasks);
     } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 }
 

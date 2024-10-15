@@ -63,6 +63,14 @@ const updateIsRoutine = async (id, isRoutine) => {
   return result.affectedRows;
 };
 
+const getRoutineTasksByListId = async (listId) => {
+  const sql = `SELECT * FROM tasks WHERE list_id = ? AND is_routine = true`;
+  let fields = [listId];
+  let [result] = await pool.query(sql, fields);
+
+  return result;
+};
+
 module.exports = {
   createTask,
   updateTaskById,
@@ -70,4 +78,5 @@ module.exports = {
   findAllTasks,
   createBulkTask,
   updateIsRoutine,
+  getRoutineTasksByListId,
 };
