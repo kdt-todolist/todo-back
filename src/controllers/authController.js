@@ -18,7 +18,7 @@ const createToken = (req, res) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, options);
 
   res.cookie('accessToken', token);
-  res.redirect('/');
+  res.status(StatusCodes.OK).end();
 }
 
 module.exports = {
