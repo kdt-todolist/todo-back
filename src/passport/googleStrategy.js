@@ -1,11 +1,10 @@
-const dotenv = require('dotenv');
-const passport = require('passport');
-const User = require('../models/User');
 const GoogleStrategy = require('passport-google-oauth20');
+const dotenv = require('dotenv');
+const User = require('../models/User');
 
 dotenv.config({ path: './src/config/.env' });
 
-passport.use(new GoogleStrategy({
+const googleStrategy = new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.GOOGLE_REDIRECT_URL,
@@ -21,6 +20,6 @@ passport.use(new GoogleStrategy({
   }
 
   return cb (null, user);
-}));
+});
 
-module.exports = passport;
+module.exports = googleStrategy;
