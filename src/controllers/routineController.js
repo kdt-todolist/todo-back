@@ -54,10 +54,19 @@ const deleteRoutine = async (req, res) => {
 }
 
 
-
+const getRoutineTasksByListId = async (req, res) => {
+    const { listId } = req.params;
+    try {
+        const tasks = await Task.getRoutineTasksByListId(listId);
+        return res.status(StatusCodes.OK).json(tasks);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 module.exports = {
     createRoutine,
     updateRoutine,
-    deleteRoutine
+    deleteRoutine,
+    getRoutineTasksByListId
 }
