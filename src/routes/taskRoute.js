@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { createTask, updateTask, deleteTask, getAllTask, createBulkTask, resetTaskStatus } = require('../controllers/taskController');
+const { verfyToken } = require('../middlewares/jwtMiddleware');
+
 router.use(express.json());
+router.use(verfyToken);
 
 router.post('/', createTask);
 
