@@ -69,7 +69,6 @@ const createBulkTaskValidation = [
         .notEmpty()
         .withMessage('Tasks를 입력해주세요')
         .isArray()
-        .trim()
         .withMessage('tasks의 형식이 배열 형식이 아닙니다.'),
 
     validateRequest

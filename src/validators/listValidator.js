@@ -48,7 +48,6 @@ const createBulkListValidation = [
         .notEmpty()
         .withMessage('lists를 입력해주세요')
         .isArray()
-        .trim()
         .withMessage('lists의 형식이 배열 형식이 아닙니다.'),
 
     validateRequest
