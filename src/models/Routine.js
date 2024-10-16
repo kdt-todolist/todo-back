@@ -45,9 +45,9 @@ const deleteRoutineById = async (id) => {
 };
 
 const getRoutineBySchedule = async (time, day) => {
-  const sql = `SELECT task_id FROM routine WHERE reset_time = ? AND ? = true`;
+  const sql = `SELECT task_id FROM routine WHERE reset_time = ? AND ${day} = true`;
 
-  let fields = [time, day];
+  let fields = [time];
   let [result] = await pool.query(sql, fields);
 
   return result;
