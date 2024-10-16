@@ -2,9 +2,11 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const scheduler = require('./scheduler/scheduler');
 
 dotenv.config({ path: './src/config/.env' });
 
+scheduler.start();
 app.listen(process.env.PORT);
 
 const taskRouter = require('./routes/taskRoute');
