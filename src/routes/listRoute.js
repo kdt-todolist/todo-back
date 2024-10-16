@@ -1,5 +1,5 @@
 const express = require('express');
-const { createListValidation, updateListValidation, deleteListValidation, createListTaskValidation } = require('../validators/listValidator');
+const { createListValidation, updateListValidation, deleteListValidation, createBulkListValidation } = require('../validators/listValidator');
 const router = express.Router();
 const { createList, updateList, deleteList, getAllList, createBulkList } = require('../controllers/listController');
 const { verfyToken } = require('../middlewares/jwtMiddleware');
@@ -15,7 +15,7 @@ router.delete('/:id', deleteListValidation, deleteList);
 
 router.get('/', getAllList);
 
-router.post('/bulk', createListTaskValidation, createBulkList);
+router.post('/bulk', createBulkListValidation, createBulkList);
 
 
 module.exports = router;

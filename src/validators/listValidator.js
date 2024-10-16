@@ -43,7 +43,7 @@ const updateListValidation = [
     validateRequest
 ]
 
-const createListTaskValidation = [
+const createBulkListValidation = [
     body('lists')
         .notEmpty()
         .withMessage('lists를 입력해주세요')
