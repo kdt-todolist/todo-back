@@ -81,6 +81,7 @@ const getRoutineTasksByListId = async (listId) => {
 module.exports = {
   createTask,
   updateTaskById,
+  updateTasksByIds,
   deleteTaskById,
   findAllTasks,
   createBulkTask,

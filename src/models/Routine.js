@@ -57,4 +57,5 @@ module.exports = {
   createRoutine,
   updateRoutineById,
   deleteRoutineById,
+  getRoutineBySchedule
 };
