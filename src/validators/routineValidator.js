@@ -81,12 +81,6 @@ const deleteRoutineValidation = [
         .isInt()
         .toInt()
         .withMessage('ID 값을 숫자 형식으로 입력해주세요.'),
-    body('taskId')
-        .notEmpty()
-        .withMessage('taskID 값을 입력해주세요')
-        .isInt()
-        .toInt()
-        .withMessage('taskID 값을 숫자 형식으로 입력해주세요.'),
     validateRequest
 ]
 

@@ -78,6 +78,14 @@ const getRoutineTasksByListId = async (listId) => {
   return result;
 };
 
+const findTaskByOwner = async (userId, id) => {
+  const sql = `SELECT * FROM tasks t JOIN lists l ON t.list_id = l.id WHERE l.user_id = ? AND t.id = ?`;
+  let fields = [userId, id];
+
+  let [result] = await pool.query(sql, fields);
+  return result.length ? true : false;
+}
+
 module.exports = {
   createTask,
   updateTaskById,
@@ -87,4 +95,5 @@ module.exports = {
   createBulkTask,
   updateIsRoutine,
   getRoutineTasksByListId,
+  findTaskByOwner
 };

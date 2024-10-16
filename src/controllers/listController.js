@@ -13,12 +13,17 @@ const createList = async (req, res) => {
 }
 
 const updateList = async (req, res) => {
+    const userId = req.userId;
     const { id } = req.params;
     const { title, isVisible } = req.body;
 
     let updateRows = 0;
     try {
-        updateRows = await List.updateListById(id, title, isVisible);
+        const isOwner = await List.findListByOwner(userId, id);
+
+        if (isOwner) {
+            updateRows = await List.updateListById(id, title, isVisible);
+        }
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
@@ -30,17 +35,23 @@ const updateList = async (req, res) => {
 }
 
 const deleteList = async (req, res) => {
+    const userId = req.userId;
     const { id } = req.params;
 
     let deleteRows = 0;
     try {
-        deleteRows = await List.deleteListById(id);
+        const isOwner = await List.findListByOwner(userId, id);
+
+        if (isOwner) {
+            deleteRows = await List.deleteListById(id);
+        }
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
     }
 
     if (!deleteRows)
         return res.status(StatusCodes.NOT_FOUND).end();
+
     res.status(StatusCodes.OK).end();
 }
 

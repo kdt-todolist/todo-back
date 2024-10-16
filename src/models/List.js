@@ -24,6 +24,14 @@ const deleteListById = async (id) => {
   return result.affectedRows;
 };
 
+const findListByOwner = async (userId, id) => {
+  const sql = `SELECT * FROM lists WHERE user_id = ? AND id = ?`;
+  let fields = [userId, id];
+  let [result] = await pool.query(sql, fields);
+
+  return result.length ? true : false;
+}
+
 const findAllLists = async (userId) => {
   const sql = `SELECT * FROM lists WHERE user_id = ?`;
   let fields = [userId];
@@ -46,5 +54,6 @@ module.exports = {
   updateListById,
   deleteListById,
   findAllLists,
-  createBulkList
+  createBulkList,
+  findListByOwner
 };

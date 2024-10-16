@@ -37,11 +37,20 @@ const updateRoutineById = async (id, week, resetTime) => {
 };
 
 const deleteRoutineById = async (id) => {
-  const sql = `DELETE FROM routine WHERE id = ?`;
+  let sql = 'SELECT task_id FROM routine WHERE id = ?'
   let fields = [id];
+
+  let [rows] = await pool.query(sql, fields);
+  let deletedId = 0;
+  if (rows.length) {
+    deletedId = rows[0].task_id;
+  }
+
+  sql = `DELETE FROM routine WHERE id = ?`;
+  fields = [id];
   let [result] = await pool.query(sql, fields);
 
-  return result.affectedRows;
+  return result.affectedRows ? deletedId : 0;
 };
 
 const getRoutineBySchedule = async (time, day) => {
@@ -53,9 +62,18 @@ const getRoutineBySchedule = async (time, day) => {
   return result;
 };
 
+const findRoutineByOwner = async (userId, id) => {
+  const sql = 'SELECT l.user_id FROM `routine` r JOIN tasks t ON r.task_id = t.id JOIN lists l ON t.list_id = l.id WHERE l.user_id = ? AND r.id = ?';
+  let fields = [userId, id];
+  let [result] = await pool.query(sql, fields);
+
+  return result.length ? true : false;
+}
+
 module.exports = {
   createRoutine,
   updateRoutineById,
   deleteRoutineById,
-  getRoutineBySchedule
+  getRoutineBySchedule,
+  findRoutineByOwner
 };
