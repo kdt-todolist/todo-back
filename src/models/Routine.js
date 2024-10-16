@@ -44,6 +44,15 @@ const deleteRoutineById = async (id) => {
   return result.affectedRows;
 };
 
+const getRoutineBySchedule = async (time, day) => {
+  const sql = `SELECT task_id FROM routine WHERE reset_time = ? AND ? = true`;
+
+  let fields = [time, day];
+  let [result] = await pool.query(sql, fields);
+
+  return result;
+};
+
 module.exports = {
   createRoutine,
   updateRoutineById,

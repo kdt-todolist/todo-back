@@ -23,6 +23,13 @@ const updateTaskById = async (id, content = null, done = false) => {
   return result.affectedRows;
 };
 
+const updateTasksByIds = async (taskIds) => {
+  let sql = `UPDATE tasks SET done = false WHERE id IN (?)`;
+  let [result] = await pool.query(sql, [taskIds]);
+
+  return result.affectedRows;
+};
+
 const deleteTaskById = async (id) => {
   const sql = `DELETE FROM tasks WHERE id = ?`;
   let fields = [id];
