@@ -17,8 +17,8 @@ const createToken = (req, res) => {
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, options);
 
-  res.cookie('accessToken', token);
-  res.status(StatusCodes.OK).end();
+  // 클라이언트를 다시 지정된 URL로 리다이렉트, 이때 토큰을 URL에 포함
+  res.redirect(`http://localhost:3000/?token=${token}`);
 }
 
 module.exports = {
